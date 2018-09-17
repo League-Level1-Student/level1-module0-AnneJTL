@@ -16,7 +16,6 @@ public class JackInTheBox {
 	private JFrame maFenetre;
 	private JButton monBouton;
 	private int compteur = 0;
-	private JLabel monLabel;
 	
 
 	public JackInTheBox() {
@@ -26,7 +25,7 @@ public class JackInTheBox {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		JackInTheBox jack = new JackInTheBox();
+		new JackInTheBox();
 
 	}
 

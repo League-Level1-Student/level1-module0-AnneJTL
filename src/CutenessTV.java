@@ -1,28 +1,27 @@
-import java.applet.AudioClip;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URI;
 
-import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
-public class SoundEffectMachine implements MouseListener {
+public class CutenessTV implements MouseListener {
 	JFrame fenetre;
 	JPanel ecran;
 	JButton bouton1;
 	JButton bouton2;
 	JButton bouton3;
-	JLabel nomMusique;
+	JLabel nomVideo;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new SoundEffectMachine();
+		new CutenessTV();
 	}
 	
-	public SoundEffectMachine() {
+	public CutenessTV() {
 		prepareGUI();
 	}
 	 
@@ -33,28 +32,44 @@ public class SoundEffectMachine implements MouseListener {
 		ecran = new JPanel();
 		fenetre.add(ecran);
 		
-		bouton1 = new JButton("Musique 1");
+		bouton1 = new JButton("Video Ducks");
 		bouton1.addMouseListener(this);
-		bouton2 = new JButton("Musique 2");
+		bouton2 = new JButton("Video Frog");
 		bouton2.addMouseListener(this);
-		bouton3 = new JButton("Musique 3");
+		bouton3 = new JButton("Video Unicorns");
 		bouton3.addMouseListener(this);
 		
 		ecran.add(bouton1);
 		ecran.add(bouton2);
 		ecran.add(bouton3);
 		
-		nomMusique = new JLabel("Musique jouée");
-		ecran.add(nomMusique);
+		nomVideo = new JLabel("Dernière vidéo");
+		ecran.add(nomVideo);
 
 		fenetre.pack();
 		fenetre.setVisible(true);
 		
 	}
 
-	private void playSound(String fileName) {
-	     AudioClip sound = JApplet.newAudioClip(getClass().getResource(fileName)); 
-	     sound.play();
+	void showDucks() {
+	     playVideo("https://www.youtube.com/watch?v=MtN1YnoL46Q");
+	}
+
+	void showFrog() {
+	     playVideo("https://www.youtube.com/watch?v=cBkWhkAZ9ds");
+	}
+
+	void showFluffyUnicorns() {
+	     playVideo("https://www.youtube.com/watch?v=a-xWhG4UU_Y");
+	}
+
+	void playVideo(String videoID) {
+	     try {
+	          URI uri = new URI(videoID);
+	          java.awt.Desktop.getDesktop().browse(uri);
+	     } catch (Exception e) {
+	          e.printStackTrace();
+	     }
 	}
 	
 	@Override
@@ -63,17 +78,19 @@ public class SoundEffectMachine implements MouseListener {
 		JButton boutonAppuye = (JButton) arg0.getSource();
 		
 		if (boutonAppuye == bouton1){
-			playSound("cymbal.wav");
-			nomMusique.setText("Musique 1");
+			showDucks();
+			nomVideo.setText("Video Duck");
 		} else if (boutonAppuye == bouton2){
-			playSound("homer-woohoo.wav");
-			nomMusique.setText("Musique 2");
+			showFrog();
+			nomVideo.setText("Video Frog");
 		} else {
-			playSound("sawing-wood-daniel_simon.wav");
-			nomMusique.setText("Musique 3");
+			showFluffyUnicorns();
+			nomVideo.setText("Video Unicors");
 		}  
 		
 	}
+	
+	
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
